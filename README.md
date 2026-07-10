@@ -1,114 +1,155 @@
-# 软件测试实践教学管理平台
+# 软件测试教学管理平台 — 项目开发框架
 
-基于 SpringBoot + MyBatis-Plus + Vue + ElementUI 的全栈教学管理平台。
+## 一、项目概述
 
-## 技术栈
+本项目是一个面向软件测试课程的教学管理平台，采用前后端分离架构，支持教师发布实验任务、管理课程、批改作业，学生提交实验、查看成绩、参与讨论等核心功能。项目由小组共同开发，每个成员负责一个独立模块，最终合并成完整系统。
 
-| 层级 | 技术 |
-|------|------|
-| 后端框架 | SpringBoot 2.7.18 |
-| ORM | MyBatis-Plus 3.5.3.1 |
-| 数据库 | H2 (开发) / MySQL (生产) |
-| 前端框架 | Vue 2.x |
-| UI 组件库 | ElementUI 2.15 |
-| 状态管理 | Vuex |
-| 路由 | Vue Router |
-| HTTP 客户端 | Axios |
-| 认证 | JWT |
+## 二、技术架构
 
-## 功能模块
+| 层级 | 技术选型 | 说明 |
+|------|---------|------|
+| 前端 | Vue 2 + Element UI + Axios | 负责页面展示和交互 |
+| 后端 | Spring Boot 2.7 + MyBatis-Plus | 负责业务逻辑和数据处理 |
+| 数据库 | MySQL 8.0 | 数据持久化存储 |
+| 构建工具 | Maven（后端）/ npm（前端） | 项目依赖管理和打包 |
 
-### 教师端
-- **实验任务管理** - 发布/编辑任务，上传测试用例模板、缺陷报告模板、环境配置文档
-- **教学评价管理** - 查看提交列表、在线批改打分、填写评语
-- **成绩统计分析** - 平均分/最高分/最低分统计，导出班级成绩Excel
-- **教学资源管理** - 上传/分类/预览/下载课件和参考资料
-- **论坛管理** - 管理帖子，置顶/设为FAQ/删除
+## 三、团队分工
 
-### 学生端
-- **查看实验任务** - 查看任务详情，下载模板和环境配置文档
-- **在线提交作业** - 上传测试用例、缺陷报告、测试总结，截止日前可重复修改
-- **自动化脚本** - 上传测试脚本，查看模拟执行日志和运行结果
-- **论坛功能** - 发帖提问、查看FAQ、回复讨论
+| 模块编号 | 模块名称 | 负责人 | 主要功能 |
+|---------|---------|--------|---------|
+| 模块 1 | 账号权限管理 | 江远兰 | 用户登录、角色权限、基础信息维护 |
+| 模块 2 | 课程信息管理 | 王燕梅 | 课程增删改查、学生课程分配 |
+| 模块 3 | 实验任务发布管理 | 匡焰 | 教师发布实验任务、上传任务文档、学生查看任务 |
+| 模块 4 | 作业提交与文件上传 | 吴佳芮 | 学生在线提交文本内容、上传附件、二次提交 |
+| 模块 5 | 作业批改与成绩统计 | 张九山 | 教师批改打分、成绩统计、生成成绩表 |
+| 公共模块 | 通用组件 | 全体成员 | 登录首页、侧边导航、讨论区、公告等 |
 
-## 快速启动
+## 四、目录结构规范
 
-### 1. 启动后端
-
-```bash
-cd backend
-mvn spring-boot:run
-```
-
-后端运行在 http://localhost:8080
-H2 控制台: http://localhost:8080/h2-console
-
-### 2. 启动前端
-
-```bash
-cd frontend
-npm install
-npm run serve
-```
-
-前端运行在 
-
-### 3. 测试账号
-
-| 角色 | 用户名 | 密码 |
-|------|--------|------|
-| 教师 | teacher | 123456 |
-| 学生1 | student1 | 123456 |
-| 学生2 | student2 | 123456 |
-| 学生3 | student3 | 123456 |
-
-## 项目结构
+### 4.1 后端目录
 
 ```
-projectone/
-├── backend/                          # SpringBoot 后端
-│   ├── pom.xml
-│   └── src/main/
-│       ├── java/com/software/testing/
-│       │   ├── TeachingPlatformApplication.java
-│       │   ├── config/               # 配置类
-│       │   ├── controller/           # 控制器
-│       │   ├── service/              # 服务接口
-│       │   │   └── impl/             # 服务实现
-│       │   ├── mapper/               # MyBatis Mapper
-│       │   ├── entity/               # 实体类
-│       │   ├── dto/                  # 数据传输对象
-│       │   ├── common/               # 通用类
-│       │   └── util/                 # 工具类
-│       └── resources/
-│           ├── application.yml
-│           ├── schema.sql            # 建表语句
-│           └── data.sql              # 初始化数据
-└── frontend/                         # Vue 前端
-    ├── package.json
-    ├── vue.config.js
-    └── src/
-        ├── main.js
-        ├── App.vue
-        ├── router/index.js           # 路由配置
-        ├── store/index.js            # Vuex 状态管理
-        ├── api/index.js              # API 接口
-        ├── utils/request.js          # Axios 封装
-        ├── layout/MainLayout.vue     # 主布局
-        └── views/
-            ├── common/               # 公共页面
-            │   ├── Login.vue
-            │   └── Dashboard.vue
-            ├── teacher/              # 教师端页面
-            │   ├── TaskManage.vue
-            │   ├── SubmissionReview.vue
-            │   ├── ScoreStatistics.vue
-            │   ├── ResourceManage.vue
-            │   └── ForumManage.vue
-            └── student/              # 学生端页面
-                ├── TaskList.vue
-                ├── HomeworkSubmit.vue
-                ├── AutoScript.vue
-                ├── ResourceView.vue
-                └── ForumView.vue
+backend/src/main/java/com/software/testing/
+├── config/                  # 公共配置（拦截器、MyBatis-Plus、异常处理等）
+├── common/                  # 通用返回结果、分页工具
+├── util/                    # 工具类（JWT、文件处理等）
+├── usermodule/              # 模块 1：账号权限管理
+├── coursemodule/            # 模块 2：课程信息管理
+├── taskmodule/              # 模块 3：实验任务发布管理
+├── submitmodule/            # 模块 4：作业提交与文件上传
+├── scoremodule/             # 模块 5：作业批改与成绩统计
+├── discussionmodule/        # 公共模块：讨论区
+└── TeachingPlatformApplication.java  # 启动类
 ```
+
+每个模块内部统一采用以下结构：
+
+```
+模块名/
+├── controller/      # 控制器层，暴露 HTTP 接口
+├── service/         # 业务层，处理业务逻辑
+│   └── impl/
+├── mapper/          # 数据访问层
+├── entity/          # 实体类
+└── dto/             # 数据传输对象（可选）
+```
+
+### 4.2 前端目录
+
+```
+frontend/src/
+├── api/                     # 公共接口封装
+├── utils/                   # 工具函数
+├── components/              # 公共组件
+├── layout/                  # 布局组件（侧边栏、导航）
+├── router/                  # 路由配置
+├── store/                   # Vuex 状态管理
+├── assets/                  # 静态资源
+├── views/common/            # 公共页面（登录、首页等）
+├── UserModule/              # 模块 1：账号权限管理
+├── CourseModule/            # 模块 2：课程信息管理
+├── TaskModule/              # 模块 3：实验任务发布管理
+├── SubmitModule/            # 模块 4：作业提交与文件上传
+├── ScoreModule/             # 模块 5：作业批改与成绩统计
+└── DiscussionModule/        # 公共模块：讨论区
+```
+
+每个前端模块内部统一采用：
+
+```
+模块名/
+├── api/
+│   └── index.js    # 该模块所有接口请求
+└── views/
+    └── xxx.vue     # 页面组件
+```
+
+## 五、开发约定
+
+### 5.1 接口规范
+
+- 统一返回格式：`Result<T>`
+- 请求路径按模块划分，例如：
+  - 账号权限：`/api/auth/**`
+  - 课程信息：`/api/courses/**`
+  - 实验任务：`/api/tasks/**`
+  - 作业提交：`/api/submissions/**`
+  - 成绩统计：`/api/scores/**`
+- 接口注释要写明功能、参数、返回值
+
+### 5.2 数据库规范
+
+- 表名统一使用 `t_` 前缀，如 `t_user`、`t_course`、`t_experiment_task`
+- 主键统一使用 `id`，自增
+- 时间字段统一使用 `create_time`、`update_time`
+- 每个模块只操作自己负责的表，避免直接修改其他模块的数据
+
+### 5.3 代码提交规范
+
+每个成员只上传自己负责的模块代码，不要提交其他模块或公共配置文件。例如：
+
+- 模块 3 负责人只提交 `taskmodule/` 和 `TaskModule/`
+- 公共模块成员提交 `config/`、`components/`、`layout/`、`views/common/` 等
+- 提交信息格式：`feat: 模块名称-功能说明`，例如 `feat: 实验任务发布管理-添加任务草稿功能`
+
+## 六、各模块核心功能说明
+
+### 模块 1：账号权限管理（江远兰）
+
+1. 用户登录：教师、学生分别输入账号密码完成登录，校验账号身份，区分角色权限。
+2. 基础信息维护：个人信息查看、基础资料修改。
+3. 权限拦截：不同角色只能打开对应菜单，学生无法进入教师批改页面。
+
+### 模块 2：课程信息管理（王燕梅）
+
+1. 教师端：新增课程、编辑课程信息、删除课程、查看全部课程列表。
+2. 学生端：只能浏览已分配的课程，不能修改课程数据。
+
+### 模块 3：实验任务发布管理（匡焰）
+
+1. 教师在线发布实验作业，上传测试用例模板、测试环境说明文档。
+2. 教师可以修改、撤回已发布的作业任务。
+3. 学生登录后查看本课程所有待完成实验任务，在线查看任务文档。
+
+### 模块 4：作业提交与文件上传（吴佳芮）
+
+1. 学生在线填写测试用例、缺陷报告、测试总结文本内容。
+2. 支持上传 Word 文档、自动化测试脚本附件，在线提交作业。
+3. 学生可以查看自己已提交记录，在截止日期前重新修改、二次提交。
+
+### 模块 5：作业批改与成绩统计（张九山）
+
+1. 教师查看全班学生提交的作业，打开文本内容与上传附件。
+2. 在线打分、填写评语，完成过程性评价。
+3. 自动生成成绩表格，支持成绩查看、数据统计分析。
+
+### 公共模块（全体成员共同完成）
+
+1. 统一登录首页、空白数据提示弹窗、全局侧边导航栏。
+2. 教学资源共享区、讨论区问答、常见问题公告。
+
+## 七、联系方式
+
+项目地址：https://gitee.com/kuang-yan-123/course-resource-platform
+
+如有问题，请在小组群内沟通。
