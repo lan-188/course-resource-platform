@@ -1,0 +1,44 @@
+# Java
+*.class
+*.jar
+*.war
+target/
+!.mvn/wrapper/maven-wrapper.jar
+
+# IDE
+.idea/
+*.iml
+.vscode/
+.project
+.classpath
+.settings/
+
+# Node
+node_modules/
+dist/
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Uploads & Data
+uploads/
+data/
+*.db
+*.mv.db
+
+# Logs
+*.log
+backend/startup*.log
+backend/mvn_error.log
+
+# Old views (已迁移到模块目录，保留为备份)
+frontend/src/views/common/Login.vue
+frontend/src/views/teacher/CourseManage.vue
+frontend/src/views/teacher/TaskManage.vue
+frontend/src/views/teacher/SubmissionReview.vue
+frontend/src/views/teacher/ScoreStatistics.vue
+frontend/src/views/student/TaskList.vue
+frontend/src/views/student/HomeworkSubmit.vue
+frontend/src/views/student/MyScores.vue
