@@ -1,6 +1,6 @@
 module.exports = {
   publicPath: process.env.NODE_ENV === 'production'
-    ? '/test-teaching-platform/'
+    ? '/course-resource-platform/'
     : '/',
   devServer: {
     port: 3000,
