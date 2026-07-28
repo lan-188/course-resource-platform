@@ -3,32 +3,24 @@ server:
 
 spring:
   datasource:
-    # 使用文件模式 H2，数据持久化到磁盘（冷启动后数据会丢失，但热重启可以保留）
-    url: jdbc:h2:file:/tmp/data/teaching_platform;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;MODE=MySQL;DATABASE_TO_LOWER=TRUE;CASE_INSENSITIVE_IDENTIFIERS=TRUE
-    username: sa
-    password: 
-    driver-class-name: org.h2.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${DB_URL:jdbc:mysql://localhost:3306/teaching_platform?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true}
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:123456}
   sql:
     init:
-      mode: always
-      continue-on-error: true
-      schema-locations: classpath:schema-h2.sql
-      data-locations: classpath:data-h2.sql
+      mode: never
   servlet:
     multipart:
       max-file-size: 50MB
       max-request-size: 100MB
-  h2:
-    console:
-      enabled: false
 
 mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   global-config:
     db-config:
       id-type: auto
 
 file:
-  upload-dir: /tmp/uploads
+  upload-dir: /opt/uploads
