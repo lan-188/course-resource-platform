@@ -1,0 +1,18 @@
+# Maven 构建产物
+target/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# 日志
+*.log
+logs/
+
+# 上传文件
+uploads/
+
+# 临时文件
+*.tmp
+*.bak
